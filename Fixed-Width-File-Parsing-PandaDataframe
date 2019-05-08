@@ -1,0 +1,25 @@
+import pandas as pd
+import struct
+
+file_path = "fufu"
+file = "onishan"
+
+with open(file_path + file, 'rb') as f:
+    file = f.readlines()
+    
+def parse_line_one(file):
+    input_line = file
+    line_format = '3s9s17s25s24s16s' #Read the characters, then skip the spaces for the next
+    fieldstruct = struct.Struct(line_format)
+    result = fieldstruct.unpack_from
+    [a, b, c, d, e, f] = result(input_line)
+    
+    return [a, b, c, d, e, f]
+    
+for i, item in enumerate(file):
+    item_one = parse_line_one(item)
+    print(item_one[0].decode())
+    print(item_one[1].decode())
+    print(item_one[2].decode())
+    print(item_one[3].decode())
+    print(item_one[4].decode())
